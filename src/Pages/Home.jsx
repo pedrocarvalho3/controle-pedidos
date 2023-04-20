@@ -1,35 +1,15 @@
-import { useEffect, useState } from "react";
+import usePedidos from "../hooks/usePedidos";
 
 export default function Home() {
-  const [pedidos, setPedidos] = useState([]);
-  const [clientes, setClientes] = useState([]);
-  const [selectedId, setSelectedId] = useState("1");
+  const { pedidos, loading } = usePedidos();
 
-  function handleSelectChange(event) {
-    setSelectedId(event.target.value);
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-full mt-[40vh] gap-2">
+        <h1 className="text-4xl text-gray-700">Carregando...</h1>
+      </div>
+    );
   }
-
-  console.log("selectedId", selectedId);
-
-  useEffect(() => {
-    fetch("https://sistemalift1.com/lift_ps/api/Pedidos")
-      .then((response) => response.json())
-      .then((data) => setPedidos(data));
-  }, []);
-
-  useEffect(() => {
-    fetch("https://sistemalift1.com/lift_ps/api/Clientes")
-      .then((response) => response.json())
-      .then((data) => setClientes(data));
-  }, []);
-
-  const data = pedidos.map((pedido) => {
-    const cliente = clientes.find((cliente) => cliente?.id === pedido?.cliente);
-    return {
-      ...pedido,
-      clienteNome: cliente?.nome,
-    };
-  });
 
   return (
     <div className="container mx-auto w-full flex flex-col items-center py-8 gap-8">
@@ -41,8 +21,11 @@ export default function Home() {
           <h3>Data</h3>
           <span></span>
         </div>
-        {data.map((pedido) => (
-          <div className="flex justify-between sm:grid grid-cols-[100px_1fr_1fr_1fr] text-gray-700 bg-gray-200 last:rounded-b-lg py-2 px-4 md:py-4 md:px-8">
+        {pedidos.map((pedido) => (
+          <div
+            key={pedido.id}
+            className="flex justify-between sm:grid grid-cols-[100px_1fr_1fr_1fr] text-gray-700 bg-gray-200 last:rounded-b-lg py-2 px-4 md:py-4 md:px-8"
+          >
             <p>{pedido.id}</p>
             <p>{pedido.clienteNome}</p>
             <p>{pedido.data}</p>
