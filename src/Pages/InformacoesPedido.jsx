@@ -65,12 +65,12 @@ export default function InformacoesPedido() {
             <p>{cliente.cpf}</p>
           </div>
         </div>
-        <div className="flex justify-between sm:grid grid-cols-[400px_1fr] text-gray-200 bg-teal-600 rounded-t-lg py-2 px-4 md:py-4 md:px-8 mt-8">
+        <div className="flex justify-between sm:grid grid-cols-[500px_1fr] text-gray-200 bg-teal-600 rounded-t-lg py-2 px-4 md:py-4 md:px-8 mt-8">
           <h3>Produto Nome</h3>
           <h3>Quantidade</h3>
         </div>
         {itemsPedido.map((item) => (
-          <div className="flex justify-between items-center sm:grid grid-cols-[400px_1fr] bg-gray-200 last:rounded-b-md py-2 px-4 md:py-4 md:px-8">
+          <div className="flex justify-between items-center sm:grid grid-cols-[500px_1fr] bg-gray-200 last:rounded-b-md py-2 px-4 md:py-4 md:px-8">
             <p>{item.produtoNome}</p>
             <p>{item.quantidade}</p>
           </div>
