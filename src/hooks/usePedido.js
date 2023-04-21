@@ -4,7 +4,6 @@ export default function usePedido(id) {
   const [loading, setLoading] = useState(false);
   const [pedido, setPedido] = useState([]);
   const [cliente, setCliente] = useState([]);
-  const [produtos, setProdutos] = useState([]);
   const [itensPedido, setItensPedido] = useState([]);
 
   const fetchPedido = async () => {
@@ -46,7 +45,6 @@ export default function usePedido(id) {
       setPedido(pedido);
       setCliente(cliente);
       setItensPedido(itens);
-      setProdutos(produtos);
     } catch (error) {
       console.error(error);
     } finally {
