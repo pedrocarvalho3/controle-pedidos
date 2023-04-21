@@ -15,7 +15,7 @@ export default function usePedido(id) {
         `https://sistemalift1.com/lift_ps/api/Pedidos/${id}`
       );
       const responseCliente = await fetch(
-        `https://sistemalift1.com/lift_ps/api/Clientes/${id}`
+        `https://sistemalift1.com/lift_ps/api/Clientes/`
       );
       const responseItensPedido = await fetch(
         `https://sistemalift1.com/lift_ps/api/ItensPedido/${id}`
@@ -25,9 +25,13 @@ export default function usePedido(id) {
       );
 
       const pedido = await responsePedido.json();
-      const cliente = await responseCliente.json();
+      const clientes = await responseCliente.json();
       const itensPedido = await responseItensPedido.json();
       const produtos = await responseProdutos.json();
+
+      const cliente = clientes.find(
+        (cliente) => cliente?.id === pedido?.cliente
+      );
 
       const itens = itensPedido.map((item) => {
         const produto = produtos.find(
